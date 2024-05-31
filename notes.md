@@ -212,7 +212,7 @@ for (let idx in marks) {
 }
 ```
 
-## For in Loop | Readable and Cleaner
+## For of Loop | Readable and Cleaner
 
 ```
 
