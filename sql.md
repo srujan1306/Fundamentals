@@ -123,14 +123,18 @@ SELECT * FROM Movies ORDER BY Title  LIMIT 5 OFFSET 5;
 18. List all the Canadian cities and their populations
 
 ```sql
-SELECT City,Population FROM north_american_cities
+SELECT City, Population
+FROM north_american_cities
 WHERE Country LIKE "Canada";
 ```
 
 19. Order all the cities in the United States by their latitude from north to south
 
 ```sql
-SELECT City FROM north_american_cities WHERE Country LIKE "United States" ORDER BY Latitude;
+SELECT City
+FROM north_american_cities
+WHERE Country LIKE "United States"
+ORDER BY Latitude DESC;
 ```
 
 20. List all the cities west of Chicago, ordered from west to east
@@ -143,3 +147,171 @@ WHERE Longitude < (SELECT Longitude
                     WHERE City="Chicago")
 ORDER BY Longitude;
 ```
+
+21. List the two largest cities in Mexico (by population)
+
+```sql
+SELECT City, Population
+FROM north_american_cities
+WHERE Country="Mexico"
+ORDER BY Population DESC LIMIT 2;
+```
+
+22. List the third and fourth largest cities (by population) in the United States and their population
+
+```sql
+SELECT City, Population
+FROM North_american_cities
+WHERE Country="United States"
+ORDER BY Population DESC
+LIMIT 2 OFFSET 2;
+```
+
+![alt text](exercise5.png)
+
+23. Find the domestic and international sales for each movie
+
+```sql
+SELECT * FROM Movies
+INNER JOIN Boxoffice
+ON Movies.Id=Boxoffice.Movie_Id;
+```
+
+24. Show the sales numbers for each movie that did better internationally rather than domestically
+
+```sql
+SELECT * FROM Movies
+INNER JOIN Boxoffice
+ON Movies.Id=Boxoffice.Movie_Id
+WHERE International_sales > Domestic_sales ;
+```
+
+25. List all the movies by their ratings in descending order
+
+```sql
+SELECT * FROM Movies
+INNER JOIN Boxoffice
+ON Movies.Id=Boxoffice.Movie_Id
+ORDER BY Rating DESC;
+```
+
+![alt text](exercise6.png)
+
+## KEYS
+
+- **PRIMARY KEY**
+  1. Unique
+  2. Should not be null
+  3. Only one column should be PK in a table.
+- ***
+
+### NORMALIZATION
+
+- Main reason for Normalization is that it increases the safety of the data.
+
+### 1NF
+
+![alt text](1NF.png)
+Convert this data into **1NF**
+![alt text](1NFexample.png)
+Solution
+![alt text](1NFegsolution.png)
+Example for 2NF
+Question : What is the problem in this data table.
+![alt text](2NFeg.png)
+The problem is that this table contains updation anamoly. Due to repeatititve data in last column. So that should be removed using Normalization.
+
+#### Solution
+
+![alt text](2NFegsolution.png)
+solution for optimizing![alt text](3NF.png)
+
+## JOINS
+
+![alt text](joins.png)
+
+26. Find the list of all buildings that have employees
+
+```sql
+SELECT DISTINCT building FROM employees;
+```
+
+27. Find the list of all buildings and their capacity
+
+```sql
+SELECT * FROM Buildings;
+```
+
+28. List all buildings and the distinct employee roles in each building (including empty buildings)
+
+```sql
+SELECT DISTINCT Building_name,Role
+FROM Buildings
+LEFT JOIN Employees
+ON Buildings.Building_name=Employees.Building;
+```
+
+![alt text](Exercise7.png)
+
+29. Find the name and role of all employees who have not been assigned to a building
+
+```sql
+SELECT Name,Role FROM employees
+WHERE Building IS NULL;
+```
+
+30. Find the names of the buildings that hold no employees
+
+```sql
+SELECT DISTINCT Building_name
+FROM Buildings
+LEFT JOIN Employees
+ON Buildings.Building_name=Employees.Building
+WHERE BUILDING IS NULL;
+```
+
+![alt text](exercise8.png)
+
+31. List all movies and their combined sales in millions of dollars
+
+```sql
+SELECT Title,(Domestic_sales + International_sales)/1000000 AS Combined_sales FROM Movies INNER JOIN Boxoffice ON Movie_id=id;
+```
+
+32. List all movies and their ratings in percent
+
+```sql
+SELECT Title, Rating*10 AS Percentage
+FROM Movies INNER JOIN Boxoffice
+ON Movie_id=id;
+```
+
+33. List all movies that were released on even number years
+
+```sql
+SELECT Title FROM Movies WHERE Year%2==0;
+```
+
+![alt text](exercise9.png)
+
+34. Find the longest time that an employee has been at the studio
+
+```sql
+SELECT MAX(Years_employed) FROM employees;
+```
+
+35. For each role, find the average number of years employed by employees in that role
+
+```sql
+SELECT Role,Avg(Years_employed)FROM employees
+WHERE Years_employed GROUP BY Role;
+```
+
+36. Find the total number of employee years worked in each building
+
+```sql
+SELECT Distinct Building, SUM(Years_employed) from Employees
+WHERE Years_employed GROUP BY Building;
+```
+
+![alt text](exercise10.png)
