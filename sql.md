@@ -228,6 +228,8 @@ solution for optimizing![alt text](3NF.png)
 
 ## JOINS
 
+- For safety we divided the tables for accessing data from different tables we need joins.
+
 ![alt text](joins.png)
 
 26. Find the list of all buildings that have employees
