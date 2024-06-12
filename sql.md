@@ -275,7 +275,10 @@ WHERE BUILDING IS NULL;
 31. List all movies and their combined sales in millions of dollars
 
 ```sql
-SELECT Title,(Domestic_sales + International_sales)/1000000 AS Combined_sales FROM Movies INNER JOIN Boxoffice ON Movie_id=id;
+SELECT Title,(Domestic_sales + International_sales)/1000000 AS Combined_sales
+FROM Movies
+INNER JOIN Boxoffice
+ON Movie_id=id;
 ```
 
 32. List all movies and their ratings in percent
@@ -289,7 +292,9 @@ ON Movie_id=id;
 33. List all movies that were released on even number years
 
 ```sql
-SELECT Title FROM Movies WHERE Year%2==0;
+SELECT Title
+FROM Movies
+WHERE Year%2==0;
 ```
 
 ![alt text](exercise9.png)
@@ -297,20 +302,23 @@ SELECT Title FROM Movies WHERE Year%2==0;
 34. Find the longest time that an employee has been at the studio
 
 ```sql
-SELECT MAX(Years_employed) FROM employees;
+SELECT MAX(Years_employed)
+FROM employees;
 ```
 
 35. For each role, find the average number of years employed by employees in that role
 
 ```sql
-SELECT Role,Avg(Years_employed)FROM employees
+SELECT Role,Avg(Years_employed)
+FROM employees
 WHERE Years_employed GROUP BY Role;
 ```
 
 36. Find the total number of employee years worked in each building
 
 ```sql
-SELECT Distinct Building, SUM(Years_employed) from Employees
+SELECT Distinct Building, SUM(Years_employed)
+FROM Employees
 WHERE Years_employed GROUP BY Building;
 ```
 
