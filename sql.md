@@ -231,6 +231,12 @@ solution for optimizing![alt text](3NF.png)
 - For safety we divided the tables for accessing data from different tables we need joins.
 
 ![alt text](joins.png)
+There are many other joins like
+
+- CROSS JOIN
+- NATURLAL JOIN
+- EQUI JOIN
+- SELF JOIN
 
 26. Find the list of all buildings that have employees
 
